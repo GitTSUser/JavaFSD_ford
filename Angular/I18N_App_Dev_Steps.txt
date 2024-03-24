@@ -1,0 +1,116 @@
+
+Angular I18N app implementation:-
+--------------------------------
+
+Ref Link:https://www.youtube.com/watch?v=XmyLDAEdWjI
+=========
+
+
+step:1
+-=====
+>ng new my-i18n-app
+
+step:2
+======
+>cd my-i18n-app
+
+my-i18n-app> ng add @angular/localize
+
+
+step:3
+=======
+update in angular.json:-
+-----------------------
+"prefix": "app",
+      
+"i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "fr": {
+            "translation": "src/locale/messages.fr.xlf"
+          },
+          "mr": { "translation": "src/locale/messges.mr.xlf" }
+        }
+      },
+
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "localize":true,
+            "i18nMissingTranslation": "error",
+
+step:4
+======
+in app.component.html
+---------------------
+  <h1 i18n="main header|Friendly welcome message">I Love people of My Country
+      my country</h1>
+
+
+step:5
+======
+update code in angular.json file
+---------------------------------
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "my-i18n-app:build",
+            "format":"xlf",
+            "outputPath": "src/locale"
+          }
+
+
+step:6
+======
+
+>ng extract-i18n
+
+now you can find messages.xlf file generated under "locale" folder of src.
+
+step:7
+======
+update messages.mr.xlf, messages.hi.xlf,... with target-language attribute.
+
+  <file source-language="en-US" datatype="plaintext" original="ng2.template" target-language="mr">
+
+
+step:8
+======
+update configurations for diff langs in angular.json file:
+
+
+"configurations": {
+            "te":{
+              "localize":["te"]
+            },
+            "fr":{
+              "localize":["fr"]
+            },
+            "production": {
+              "budgets": [
+                {
+          
+
+
+
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+             "fr":{
+               "browserTarget": "my-i18n-app:build:development,fr"
+             },
+            "production": {
+              "browserTarget": "my-i18n-app:build:production"
+            },
+            "development": {
+              "browserTarget": "my-i18n-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+
+
+step-9
+=======
+> ng serve --open --configuration=fr
