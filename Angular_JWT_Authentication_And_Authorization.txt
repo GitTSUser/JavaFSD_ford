@@ -1,0 +1,8 @@
+
+Angular App Authentication and Authorization with JWT 
+=====================================================
+
+Ref Link:
+----------
+
+https://www.bezkoder.com/angular-13-jwt-auth/
